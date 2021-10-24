@@ -14,3 +14,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/car_types', function () {
     return view('cars.index');
 })->name('carTypes');
+
+
+// Services
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/services', function () {
+    return view('services.index');
+})->name('services');

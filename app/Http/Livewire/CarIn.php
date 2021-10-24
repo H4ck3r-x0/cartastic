@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Models\CarType;
 use Livewire\Component;
 
 class CarIn extends Component
@@ -14,12 +15,20 @@ class CarIn extends Component
     public $step = 1;
     public $newClientPhone = '';
     public $newClientName = '';
+    public $carTypes;
+    public $selectedCarType = '';
 
+
+    public function mount()
+    {
+        $this->carTypes = CarType::latest()->get();
+    }
 
     public function updatedShowCarInForm()
     {
         $this->clientPhone = '';
         $this->lookedUpClient = null;
+        $this->selectedCarType = '';
         $this->step = 1;
     }
 
@@ -41,7 +50,6 @@ class CarIn extends Component
             $this->clientPhone = '';
         }
     }
-
 
     public function signUpNewClient()
     {

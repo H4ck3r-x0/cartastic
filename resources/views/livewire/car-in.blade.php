@@ -6,18 +6,20 @@
 
     @if($showCarInForm && $step == 1)
     <div class="flex items-center p-6 animate__animated animate__fadeIn">
-        <div class="flex flex-col">
+        <div class="flex flex-col w-full">
             <div class="flex flex-row items-center mb-3">
                 <div>
                     <x-jet-label for="phone" value="{{ __('Client Phone Number') }}" />
                     <x-jet-input wire:model="clientPhone" size="50" id="phone" class="block mt-1 w-full" type="text" :value="old('phone')" placeholder="Client's Phone Number" required />
                 </div>
+
                 @if(!empty($clientPhone))
                 <x-jet-button class="ml-4 mt-6" wire:click="lookupClientPhone({{$clientPhone}})">
                     {{ __('Lookup') }}
                 </x-jet-button>
                 @endif
             </div>
+
 
             @if($lookedUpClient !== null)
             <div class="flex flex-row items-center mb-3">
@@ -33,8 +35,17 @@
                     </div>
                 </div>
             </div>
-            @endif
 
+            <!-- Car Types -->
+            <div class="flex items-center justify-center space-x-3">
+                @foreach($carTypes as $type)
+                <label for="{{ $type->id }}" class="inline-flex items-center mt-3">
+                    <input type="radio" wire:model="selectedCarType" value="{{ $type->name }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$type->id}}">
+                    <span class="ml-2 text-gray-700">{{ $type->name }}</span>
+                </label>
+                @endforeach
+            </div>
+            @endif
         </div>
     </div>
     @elseif($step === 2)

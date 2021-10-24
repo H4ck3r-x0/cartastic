@@ -19,6 +19,9 @@
                     <x-jet-nav-link href="{{ route('carTypes') }}" :active="request()->routeIs('carTypes')">
                         {{ __('Car Types') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">
+                        {{ __('Services') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -145,6 +148,19 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('carTypes') }}" :active="request()->routeIs('carTypes')">
+                {{ __('Car Types') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">
+                {{ __('Services') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
