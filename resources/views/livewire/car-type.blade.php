@@ -27,7 +27,7 @@
                                         Created At
                                     </th>
                                     <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+                                        <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>

@@ -45,7 +45,19 @@
                 </label>
                 @endforeach
             </div>
+
+            <!-- Services -->
+            <div class="flex items-center justify-center space-x-3 mt-10">
+                @foreach($services as $service)
+                <label for="{{ $service->id }}" class="inline-flex items-center mt-3">
+                    <input type="checkbox" wire:model="selectedServices" value="{{ $service->id }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$service->id}}">
+                    <span class="ml-2 text-gray-700">{{ $service->name }}</span>
+                    <span class="ml-2 text-gray-700 space-x-4">({{ $service->price }})</span>
+                </label>
+                @endforeach
+            </div>
             @endif
+            <p wire:model="totalPrice">{{ $totalPrice }}</p>
         </div>
     </div>
     @elseif($step === 2)

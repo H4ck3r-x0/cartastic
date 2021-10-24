@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Client;
 use App\Models\CarType;
+use App\Models\Service;
 use Livewire\Component;
 
 class CarIn extends Component
@@ -16,12 +17,23 @@ class CarIn extends Component
     public $newClientPhone = '';
     public $newClientName = '';
     public $carTypes;
+    public $services;
     public $selectedCarType = '';
-
+    public $selectedServices = [];
+    public $totalPrice = 0;
 
     public function mount()
     {
         $this->carTypes = CarType::latest()->get();
+        $this->services = Service::latest()->get();
+    }
+
+    public function checkme()
+    {
+        $getAll = Service::findMany($this->selectedServices);
+        $this->totalPrice = array_reduce($getAll->toArray(), function ($sum, $item) {
+            return $sum += $item['price'];
+        }, 0);
     }
 
     public function updatedShowCarInForm()
@@ -29,6 +41,7 @@ class CarIn extends Component
         $this->clientPhone = '';
         $this->lookedUpClient = null;
         $this->selectedCarType = '';
+        $this->selectedServices = [];
         $this->step = 1;
     }
 
