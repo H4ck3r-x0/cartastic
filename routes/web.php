@@ -20,3 +20,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/car_types', fun
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/services', function () {
     return view('services.index');
 })->name('services');
+
+
+// Taxes
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/taxes', function () {
+    return view('taxes.index');
+})->name('taxes');

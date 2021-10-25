@@ -9,6 +9,7 @@ use Livewire\Component;
 
 class CarIn extends Component
 {
+    protected $listeners = ['serviceAdded' => 'calculateTotalPrice'];
     public $showCarInForm = false;
     public $clientPhone = '';
     public $clientName = '';
@@ -28,7 +29,7 @@ class CarIn extends Component
         $this->services = Service::latest()->get();
     }
 
-    public function checkme()
+    public function calculateTotalPrice()
     {
         $getAll = Service::findMany($this->selectedServices);
         $this->totalPrice = array_reduce($getAll->toArray(), function ($sum, $item) {

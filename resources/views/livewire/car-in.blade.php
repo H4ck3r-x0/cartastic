@@ -47,17 +47,28 @@
             </div>
 
             <!-- Services -->
+            @if(!empty($selectedCarType))
             <div class="flex items-center justify-center space-x-3 mt-10">
                 @foreach($services as $service)
                 <label for="{{ $service->id }}" class="inline-flex items-center mt-3">
-                    <input type="checkbox" wire:model="selectedServices" value="{{ $service->id }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$service->id}}">
+                    <input type="checkbox" wire:model="selectedServices" wire:click="$emit('serviceAdded')" value="{{ $service->id }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$service->id}}">
                     <span class="ml-2 text-gray-700">{{ $service->name }}</span>
                     <span class="ml-2 text-gray-700 space-x-4">({{ $service->price }})</span>
                 </label>
                 @endforeach
             </div>
+
+            <!-- Total Price -->
+            <div class="flex flex-row items-center mb-3 mt-6">
+                <div>
+                    <div class="flex flex-row items-center">
+                        <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Total Price:') }}" />
+                        <p wire:model="totalPrice" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPrice }} SR</p>
+                    </div>
+                </div>
+            </div>
             @endif
-            <p wire:model="totalPrice">{{ $totalPrice }}</p>
+            @endif
         </div>
     </div>
     @elseif($step === 2)
