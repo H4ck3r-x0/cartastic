@@ -17,6 +17,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('name');
             $table->float('price');
+            $table->foreignId('car_types_id')->constrained();
             $table->timestamps();
         });
     }

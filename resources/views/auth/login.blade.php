@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <h1 class="antialiased text-indigo-400 text-4xl font-semibold tracking-wider">CarTastic</h1>
+            <h1 class="antialiased text-indigo-400 text-4xl font-semibold tracking-wider">CleanTastic</h1>
             <!-- <x-jet-authentication-card-logo /> -->
         </x-slot>
 

@@ -7,7 +7,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="font-semibold text-xl text-indigo-500 tracking-widest mt-3">
                         <!-- <x-jet-application-mark class="block h-9 w-auto" /> -->
-                        CarTastic
+                        CleanTastic
                     </a>
                 </div>
 

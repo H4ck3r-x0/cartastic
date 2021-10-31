@@ -31,8 +31,16 @@ class CarIn extends Component
     public function mount()
     {
         $this->carTypes = CarType::latest()->get();
-        $this->services = Service::latest()->get();
+        $this->services = Service::where('id', 1)->get();
         $this->taxRate = Tax::latest()->first();
+    }
+
+    public function updatedSelectedCarType($value)
+    {
+        $this->selectedServices = [];
+        $this->totalPrice = 0.0;
+        $this->totalPriceWithTax = 0;
+        $this->services = Service::where('car_types_id', $value)->get();
     }
 
     public function calculateTotalPrice()
@@ -42,7 +50,7 @@ class CarIn extends Component
             return $sum += $item['price'];
         }, 0);
         $taxCalculation = ($this->totalPrice / 100) * $this->taxRate->tax;
-        $this->totalPriceWithTax = $this->totalPrice + $taxCalculation;
+        $this->totalPriceWithTax = $this->totalPrice - $taxCalculation;
     }
 
     public function updatedShowCarInForm()

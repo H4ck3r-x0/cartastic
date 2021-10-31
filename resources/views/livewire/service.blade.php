@@ -1,4 +1,14 @@
 <div class="p-6">
+    @if(!$types->isEmpty())
+    <div class="mb-3">
+        <x-jet-label for="type" value="{{ __('Car Type') }}" />
+        <select class="w-full" id="type" wire:model="car_types_id">
+            <option value="">Select A Car Type</option>
+            @foreach($types as $type)
+            <option value="{{ $type->id }}">{{$type->name}}</option>
+            @endforeach
+        </select>
+    </div>
     <div>
         <x-jet-label for="service" value="{{ __('Service Name') }}" />
         <x-jet-input wire:model="name" id="service" class="block mt-1 w-full" type="text" :value="old('name')" placeholder="Service Name, eg car wash" required autofocus />
@@ -9,7 +19,7 @@
         <x-jet-input wire:model="price" id="price" class="block mt-1 w-full" type="text" :value="old('price')" placeholder="Service Price" required />
     </div>
 
-    @if(!empty($name) && !empty($price))
+    @if(!empty($name) && !empty($price) && !empty($car_types_id))
     <div class="mt-3">
         <x-jet-button wire:click="save">
             {{ __('Save') }}
@@ -81,5 +91,7 @@
         </div>
     </div>
     @endif
-
+    @else
+    <h1>Please Add Car Types First, <a href="{{ route('carTypes') }}" class="text-blue-400">Click Here to Add</a>.</h1>
+    @endif
 </div>
