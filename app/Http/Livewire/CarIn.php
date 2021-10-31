@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Http;
 use App\Models\Client;
 use App\Models\CarType;
 use App\Models\Service;
 use Livewire\Component;
+use App\Models\Tax;
 
 class CarIn extends Component
 {
@@ -21,12 +23,16 @@ class CarIn extends Component
     public $services;
     public $selectedCarType = '';
     public $selectedServices = [];
-    public $totalPrice = 0;
+    public $scheduledWash = 1;
+    public $totalPrice = 0.0;
+    public $taxRate;
+    public $totalPriceWithTax;
 
     public function mount()
     {
         $this->carTypes = CarType::latest()->get();
         $this->services = Service::latest()->get();
+        $this->taxRate = Tax::latest()->first();
     }
 
     public function calculateTotalPrice()
@@ -35,6 +41,8 @@ class CarIn extends Component
         $this->totalPrice = array_reduce($getAll->toArray(), function ($sum, $item) {
             return $sum += $item['price'];
         }, 0);
+        $taxCalculation = ($this->totalPrice / 100) * $this->taxRate->tax;
+        $this->totalPriceWithTax = $this->totalPrice + $taxCalculation;
     }
 
     public function updatedShowCarInForm()

@@ -58,12 +58,43 @@
                 @endforeach
             </div>
 
+            @if(!empty($selectedServices))
+            <!-- scheduled Wash -->
+            <div class="flex items-center justify-center space-x-3 mt-6">
+                <label for="scheduledWash" class="inline-flex items-center mt-3">
+                    <input type="radio" wire:model="scheduledWash" value="1" class="form-checkbox h-8 w-8 text-gray-600" id="scheduledWash">
+                    <span class="ml-2 text-gray-700">Now</span>
+                </label>
+                <label for="scheduledWash" class="inline-flex items-center mt-3">
+                    <input type="radio" wire:model="scheduledWash" value="2" class="form-checkbox h-8 w-8 text-gray-600" id="scheduledWash">
+                    <span class="ml-2 text-gray-700">Scheduled</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-center space-x-3 mt-6">
+                @if($scheduledWash == 2)
+                <input type="datetime-local">
+                @endif
+            </div>
+            @endif
             <!-- Total Price -->
-            <div class="flex flex-row items-center mb-3 mt-6">
+            <div class="flex flex-col mb-3 mt-6">
                 <div>
                     <div class="flex flex-row items-center">
                         <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Total Price:') }}" />
                         <p wire:model="totalPrice" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPrice }} SR</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex flex-row items-center">
+                        <x-jet-label class="mr-3" for="taxRate" value="{{ __('Tax Rate:') }}" />
+                        <p wire:model="taxRate" class="text-sm font-semibold text-gray-800 tracking-wide">%{{ $taxRate->tax }}</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex flex-row items-center">
+                        <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Amount') }}" />
+                        <p wire:model="totalPriceWithTax" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPriceWithTax }} SR</p>
                     </div>
                 </div>
             </div>
