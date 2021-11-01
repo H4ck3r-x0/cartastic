@@ -39,7 +39,9 @@ class CarIn extends Component
         $this->selectedServices = [];
         $this->totalPrice = 0.0;
         $this->totalPriceWithTax = 0;
-        $this->services = Service::where('car_types_id', $value)->get();
+        $this->services = Service::with('carType')
+            ->where('car_types_id', $value)
+            ->get();
     }
 
     public function calculateTotalPrice()
