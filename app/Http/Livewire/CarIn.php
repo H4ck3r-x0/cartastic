@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Http;
 use App\Models\Client;
 use App\Models\CarType;
 use App\Models\Service;
@@ -13,6 +12,7 @@ class CarIn extends Component
 {
     protected $listeners = ['serviceAdded' => 'calculateTotalPrice'];
     public $showCarInForm = false;
+    public $clientId = null;
     public $clientPhone = '';
     public $clientName = '';
     public $lookedUpClient = null;
@@ -31,7 +31,6 @@ class CarIn extends Component
     public function mount()
     {
         $this->carTypes = CarType::latest()->get();
-        $this->services = Service::where('id', 1)->get();
         $this->taxRate = Tax::latest()->first();
     }
 
@@ -74,6 +73,7 @@ class CarIn extends Component
         $client = Client::where('phone', $clientPhone)->first();
         if ($client !== null) {
             $this->lookedUpClient = $client;
+            $this->clientId = $client->id;
         } else {
             $this->step = 2;
             $this->newClientPhone = $this->clientPhone;
@@ -96,14 +96,20 @@ class CarIn extends Component
         }
     }
 
-    public function render()
+    public function confirm()
     {
-        return view('livewire.car-in');
+        dd($this->clientId);
     }
 
-    protected function cleanClientData()
+    public function render()
+    {
+        return view('livewire.CarIn.car-in');
+    }
+
+    private function cleanClientData()
     {
         $this->lookedUpClient = null;
+        $this->clientId = null;
         $this->newClientPhone = '';
         $this->newClientName = '';
     }

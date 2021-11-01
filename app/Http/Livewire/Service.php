@@ -16,7 +16,7 @@ class Service extends Component
 
     public function mount()
     {
-        $this->services = CarService::latest()->get();
+        $this->services = CarService::with('carType')->latest()->get();
         $this->types = CarType::latest()->get();
     }
 

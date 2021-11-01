@@ -10,4 +10,9 @@ class Service extends Model
     use HasFactory;
 
     public $guarded = [];
+
+    public function carType()
+    {
+        return $this->belongsTo(CarType::class, 'car_types_id');
+    }
 }

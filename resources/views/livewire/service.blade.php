@@ -42,6 +42,9 @@
                                     Service Price
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Car Type
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Created At
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
@@ -74,6 +77,15 @@
                                     <div class="flex items-center">
                                         <div>
                                             <div class="text-sm font-medium text-gray-900">
+                                                {{ $service->carType->name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">
                                                 {{ $service->created_at->diffForHumans() }}
                                             </div>
                                         </div>
@@ -92,6 +104,8 @@
     </div>
     @endif
     @else
-    <h1>Please Add Car Types First, <a href="{{ route('carTypes') }}" class="text-blue-400">Click Here to Add</a>.</h1>
+    <h1>
+        Please Add Car Types First, <a href="{{ route('carTypes') }}" class="text-blue-400">Click Here to Add</a>.
+    </h1>
     @endif
 </div>

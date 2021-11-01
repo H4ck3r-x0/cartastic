@@ -22,44 +22,18 @@
 
 
             @if($lookedUpClient !== null)
-            <div class="flex flex-row items-center mb-3">
-                <div>
-                    <div class="flex flex-row items-center">
-                        <x-jet-label class="mr-3" for="name" value="{{ __('Client Name:') }}" />
-                        <p class="text-sm font-semibold text-gray-800 tracking-wide">{{ $lookedUpClient->name }}</p>
-                    </div>
-
-                    <div class="flex flex-row items-center mt-2">
-                        <x-jet-label class="mr-3" for="phone" value="{{ __('Client Phone:') }}" />
-                        <p class="text-sm font-semibold text-gray-800 tracking-wide">{{ $lookedUpClient->phone }}</p>
-                    </div>
-                </div>
-            </div>
-
+            {{-- Client Data --}}
+            @include('livewire.CarIn._client-data')
+            
             <!-- Car Types -->
-            <div class="flex items-center justify-center space-x-3">
-                @foreach($carTypes as $type)
-                <label for="{{ $type->id }}" class="inline-flex items-center mt-3">
-                    <input type="radio" wire:model="selectedCarType" value="{{ $type->id }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$type->id}}">
-                    <span class="ml-2 text-gray-700">{{ $type->name }}</span>
-                </label>
-                @endforeach
-            </div>
+            @include('livewire.CarIn._car-types')
 
             <!-- Services -->
             @if(!empty($selectedCarType))
-            <div class="flex items-center justify-center space-x-3 mt-10">
-                @foreach($services as $service)
-                <label for="{{ $service->id }}" class="inline-flex items-center mt-3">
-                    <input type="checkbox" wire:model="selectedServices" wire:click="$emit('serviceAdded')" value="{{ $service->id }}" class="form-checkbox h-8 w-8 text-gray-600" id="{{$service->id}}">
-                    <span class="ml-2 text-gray-700">{{ $service->name }}</span>
-                    <span class="ml-2 text-gray-700 space-x-4">({{ $service->price }})</span>
-                </label>
-                @endforeach
-            </div>
+            @include('livewire.CarIn._car-services')
 
             @if(!empty($selectedServices))
-            <!-- scheduled Wash -->
+            <!-- Scheduled Wash -->
             <div class="flex items-center justify-center space-x-3 mt-6">
                 <label for="scheduledWash" class="inline-flex items-center mt-3">
                     <input type="radio" wire:model="scheduledWash" value="1" class="form-checkbox h-8 w-8 text-gray-600" id="scheduledWash">
@@ -78,25 +52,34 @@
             </div>
             @endif
             <!-- Total Price -->
-            <div class="flex flex-col mb-3 mt-6">
+            <div class="flex flex-row justify-between mb-3 mt-6">
                 <div>
-                    <div class="flex flex-row items-center">
-                        <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Total Price:') }}" />
-                        <p wire:model="totalPrice" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPrice }} SR</p>
+                    <div>
+                        <div class="flex flex-row items-center">
+                            <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Total Price:') }}" />
+                            <p wire:model="totalPrice" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPrice }} SR</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-row items-center">
+                            <x-jet-label class="mr-3" for="taxRate" value="{{ __('Tax Rate:') }}" />
+                            <p wire:model="taxRate" class="text-sm font-semibold text-gray-800 tracking-wide">%{{ $taxRate->tax }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-row items-center">
+                            <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Amount') }}" />
+                            <p wire:model="totalPriceWithTax" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPriceWithTax }} SR</p>
+                        </div>
                     </div>
                 </div>
+                @if(!empty($selectedServices))
                 <div>
-                    <div class="flex flex-row items-center">
-                        <x-jet-label class="mr-3" for="taxRate" value="{{ __('Tax Rate:') }}" />
-                        <p wire:model="taxRate" class="text-sm font-semibold text-gray-800 tracking-wide">%{{ $taxRate->tax }}</p>
-                    </div>
+                    <x-jet-button class="ml-4 mt-6" wire:click="confirm">
+                        {{ __('Confirm') }}
+                    </x-jet-button>
                 </div>
-                <div>
-                    <div class="flex flex-row items-center">
-                        <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Amount') }}" />
-                        <p wire:model="totalPriceWithTax" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPriceWithTax }} SR</p>
-                    </div>
-                </div>
+                @endif
             </div>
             @endif
             @endif
