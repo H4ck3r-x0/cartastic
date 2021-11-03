@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Invoice as Invoices;
-use App\Models\Client;
 use App\Models\Service;
 use Livewire\Component;
 

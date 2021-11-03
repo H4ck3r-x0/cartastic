@@ -26,3 +26,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/services', func
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/taxes', function () {
     return view('taxes.index');
 })->name('taxes');
+
+// Reports
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/reports', function () {
+    return view('reports.index');
+})->name('reports');
