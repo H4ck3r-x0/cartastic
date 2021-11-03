@@ -18,10 +18,9 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('client_id')->constrained();
             $table->string('client_car')->nullable();
             $table->text('services')->nullable();
-            $table->float('taxRate')->nullable();
-            $table->float('totalPrice')->nullable();
-            // $table->float('totalPriceWithTax')->nullable();
-            $table->integer('counter')->nullable();
+            $table->integer('taxRate')->nullable();
+            $table->integer('totalPrice')->nullable();
+            $table->integer('totalPriceWithTax')->nullable();
             $table->timestamps();
         });
     }

@@ -69,7 +69,7 @@
                     <div>
                         <div class="flex flex-row items-center">
                             <x-jet-label class="mr-3" for="totalPrice" value="{{ __('Amount') }}" />
-                            <p wire:model="totalPriceWithTax" class="text-sm font-semibold text-gray-800 tracking-wide">{{ $totalPriceWithTax }} SR</p>
+                            <p wire:model="totalPriceWithTax" class="text-sm font-semibold text-gray-800 tracking-wide">{{ (int)$totalPriceWithTax }} SR</p>
                         </div>
                     </div>
                 </div>

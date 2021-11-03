@@ -16,7 +16,7 @@
 						<label class="w-32 text-gray-800 block font-bold text-sm uppercase tracking-wide">Invoice No.</label>
 						<span class="mr-4 inline-block hidden md:block">:</span>
 						<div class="flex-1">
-						<span>1</span>
+						<span>{{ $invoceId }}</span>
 						</div>
 					</div>
 
@@ -25,7 +25,7 @@
 						<span class="mr-4 inline-block hidden md:block">:</span>
 						<div class="flex-1">
 						<span>
-							{{ Carbon\Carbon::now()->format('Y-m-d'); }}
+							{{ $invoice_created_at }}
 						</span>
 						</div>
 					</div>
