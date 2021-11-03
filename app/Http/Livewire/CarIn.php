@@ -20,6 +20,7 @@ class CarIn extends Component
     public $newClientPhone = '';
     public $newClientName = '';
     public $carTypes;
+    public $clientCarType;
     public $services;
     public $selectedCarType = '';
     public $selectedServices = [];
@@ -42,6 +43,7 @@ class CarIn extends Component
         $this->services = Service::with('carType')
             ->where('car_types_id', $value)
             ->get();
+        $this->clientCarType = CarType::find($value);
     }
 
     public function calculateTotalPrice()
@@ -51,7 +53,8 @@ class CarIn extends Component
             return $sum += $item['price'];
         }, 0);
         $taxCalculation = ($this->totalPrice / 100) * $this->taxRate->tax;
-        $this->totalPriceWithTax = $this->totalPrice - $taxCalculation;
+        // $this->totalPriceWithTax = $this->totalPrice - $taxCalculation;
+        $this->totalPriceWithTax = $this->totalPrice + $taxCalculation;
     }
 
     public function updatedShowCarInForm()
@@ -100,7 +103,15 @@ class CarIn extends Component
 
     public function confirm()
     {
-        dd($this->clientId);
+        $this->emit(
+            'confirmNewCarIn',
+            $this->lookedUpClient->id,
+            $this->selectedServices,
+            $this->taxRate->tax,
+            $this->totalPrice,
+            $this->totalPriceWithTax,
+            $this->clientCarType->name
+        );
     }
 
     public function render()
