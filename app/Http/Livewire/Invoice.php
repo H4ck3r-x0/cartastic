@@ -25,6 +25,7 @@ class Invoice extends Component
     {
         $newInvoice = Invoices::create([
             'client_id' => $clientId,
+            'user_id' => auth()->user()->id,
             'client_car' => $clientCarType,
             'services' => json_encode($selectedServices),
             'taxRate' => $taxRate,

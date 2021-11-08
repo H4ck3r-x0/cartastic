@@ -26,7 +26,7 @@ class Report extends Component
         $collection = collect($this->invoices);
         $this->totalTaxes = array_reduce($collection->toArray(), function ($sum, $item) {
             $taxes = ($item['totalPrice'] / 100) * $item['taxRate'];
-            return $sum += (int)$taxes;
+            return $sum += $taxes;
         }, 0);
     }
 
@@ -35,9 +35,21 @@ class Report extends Component
         $this->search($this->query);
     }
 
+    public function delete($invoiceId)
+    {
+        Invoice::destroy($invoiceId);
+        $this->mount();
+        $this->render();
+    }
+
+    public function showInvoice($invoiceId)
+    {
+        $this->emit('showInvoice', $invoiceId);
+    }
+
     public function render()
     {
-        return view('livewire.report');
+        return view('livewire.reports.report');
     }
 
     protected function search($searchQuery)
@@ -50,6 +62,9 @@ class Report extends Component
                     $query->where('phone', $searchQuery);
                 })
                 ->orWhereHas('client', function ($query) use ($searchQuery) {
+                    $query->where('name', $searchQuery);
+                })
+                ->orWhereHas('user', function ($query) use ($searchQuery) {
                     $query->where('name', $searchQuery);
                 })->get();
             $this->totalGrand = $this->invoices->sum('totalPriceWithTax');

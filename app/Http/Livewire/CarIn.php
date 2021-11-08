@@ -25,7 +25,7 @@ class CarIn extends Component
     public $selectedCarType = '';
     public $selectedServices = [];
     public $scheduledWash = 1;
-    public $totalPrice = 0.0;
+    public $totalPrice = 0;
     public $taxRate;
     public $totalPriceWithTax;
 

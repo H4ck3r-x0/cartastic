@@ -10,7 +10,12 @@ class Invoice extends Model
     use HasFactory;
 
     public $guarded = [];
-    public $with = ['client'];
+    public $with = ['client', 'user'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function client()
     {
