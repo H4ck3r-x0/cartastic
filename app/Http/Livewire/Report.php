@@ -52,6 +52,7 @@ class Report extends Component
         return view('livewire.reports.report');
     }
 
+    // TODO Refactor
     protected function search($searchQuery)
     {
         $searchQuery = $this->query;
