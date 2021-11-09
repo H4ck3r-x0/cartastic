@@ -75,7 +75,9 @@ class CarIn extends Component
 
     public function lookupClientPhone($clientPhone)
     {
-        $client = Client::where('phone', $clientPhone)->first();
+        $client = Client::with('lastInvoice')
+            ->withCount('invoices')
+            ->where('phone', $clientPhone)->first();
         if ($client !== null) {
             $this->lookedUpClient = $client;
             $this->clientId = $client->id;

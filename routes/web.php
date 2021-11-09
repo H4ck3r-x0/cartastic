@@ -32,7 +32,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/reports', funct
     return view('reports.index');
 })->name('reports');
 
-// Reports
+// Clients
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/clients', function () {
     return view('clients.index');
 })->name('clients');
+
+// View Client Invoices
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/client/{client}/invoices', function () {
+    return view('ClientInvoices.index');
+})->name('viewClientInvoices');
