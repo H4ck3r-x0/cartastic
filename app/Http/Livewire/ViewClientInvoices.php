@@ -13,8 +13,8 @@ class ViewClientInvoices extends Component
     public function mount(Request $request)
     {
         $this->client = Client::with('invoices')->find($request->client);
-        // dd($this->client);
     }
+
     public function render()
     {
         return view('livewire.view-client-invoices');
