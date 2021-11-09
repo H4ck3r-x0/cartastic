@@ -17,10 +17,17 @@
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Client Phone
+                </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Visits Count
                   </th>
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    created at
+                    Latest Vist
                   </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    joind
+                  </th>
+                  
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">View Invoice</span>
                 </th>
@@ -56,12 +63,24 @@
                       </div>
                     </div>
                   </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-green-800">
+                       {{ $client->invoices_count ? $client->invoices_count : 'N/A' }}
+                    </span>
+                  </td>
+                  <td class="flex flex-col px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ $client->lastInvoice ? $client->lastInvoice->created_at->format('Y-m-d') : 'N/A' }}
+                    <span class="text-xs font-semibold  text-green-600">
+                      {{ $client->lastInvoice ? $client->lastInvoice->created_at->diffForHumans() : 'N/A' }}
+                    </span>
+                  </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {{ $client->created_at->format('Y-m-d') }}
                   </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a href="#" wire:click="delete({{ $client->id }})" class="text-red-600 hover:text-indigo-900">Delete</a>
-              </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <a href="#" class="text-indigo-600 hover:text-indigo-900">View Invoices</a>
+                  </td>
+           
               </tr>
               @endforeach
             </tbody>

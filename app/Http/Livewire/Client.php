@@ -12,20 +12,15 @@ class Client extends Component
 
     public function mount()
     {
-        $this->clients = Clients::latest()->get();
+        $this->clients = Clients::with('lastInvoice')
+            ->withCount('invoices')
+            ->latest()
+            ->get();
     }
 
     public function updatedQuery()
     {
         $this->search($this->query);
-    }
-
-
-    public function delete($clientId)
-    {
-        Clients::destroy($clientId);
-        $this->mount();
-        $this->render();
     }
 
     public function render()
@@ -37,12 +32,17 @@ class Client extends Component
     {
         $searchQuery = $this->query;
         if ($searchQuery !== '') {
-            $this->clients = Clients::where('id', $this->query)
+            $this->clients = Clients::with('lastInvoice')
+                ->withCount('invoices')
+                ->where('id', $this->query)
                 ->orWhere('name', $this->query)
                 ->orWhere('phone', $this->query)
                 ->get();
         } else {
-            $this->clients = Clients::latest()->get();
+            $this->clients = Clients::with('lastInvoice')
+                ->withCount('invoices')
+                ->latest()
+                ->get();
         }
     }
 }

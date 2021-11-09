@@ -10,4 +10,14 @@ class Client extends Model
     use HasFactory;
 
     public $guarded = [];
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function lastInvoice()
+    {
+        return $this->hasOne(Invoice::class)->latest();
+    }
 }
