@@ -3,19 +3,24 @@
 namespace App\Http\Livewire;
 
 use App\Models\Invoice;
+use App\Models\CarType;
 use Livewire\Component;
 
 class Report extends Component
 {
     public $invoices = [];
+    public $cars = [];
     public $query = '';
     public $totalGrand;
     public $totalPrice;
     public $totalTaxes;
+    public $carType = '';
+
 
     public function mount()
     {
         $this->invoices = Invoice::latest()->get();
+        $this->cars = CarType::latest()->get();
         $this->totalGrand = $this->invoices->sum('totalPriceWithTax');
         $this->totalPrice = $this->invoices->sum('totalPrice');
         $this->taxCalcluation();
@@ -50,6 +55,22 @@ class Report extends Component
     public function render()
     {
         return view('livewire.reports.report');
+    }
+
+    public function updatedCarType()
+    {
+        $this->filterTableByCarType();
+    }
+
+    protected function filterTableByCarType()
+    {
+        if (!empty($this->carType)) {
+            $this->invoices = Invoice::latest()
+                ->where('client_car', $this->carType)
+                ->get();
+        } else {
+            $this->invoices = Invoice::latest()->get();
+        }
     }
 
     // TODO Refactor

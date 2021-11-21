@@ -1,9 +1,17 @@
 <div x-data="{show: true, viewedRow: null}">
-  <div class="flex justify-between">
+  <div class="flex items-center">
     <div class="p-4">
         <x-jet-input @keyup="show=true" class="block mt-1" size="30" type="text" wire:model="query"  required autofocus placeholder="Search, eg, id, car type name etc .." />
     </div>
- 
+    <div class="p-4">
+      <select wire:model="carType" id="carType">
+        <option value="">All Cars</option>
+        @foreach ($cars as $car)
+        <option value="{{ $car->name }}">{{ $car->name }}</option>  
+        @endforeach
+      </select>
+    </div>
+
     <x-jet-button class="p-4 m-4" @click="show=!show" x-text="show ? 'Hide Table' : 'Show Table'">
     </x-jet-button>
 </div>
@@ -96,7 +104,6 @@
               </td>
               </tr>
               @endforeach
-              <!-- More people... -->
             </tbody>
           </table>
         </div>

@@ -47,7 +47,7 @@
 
             <div class="flex items-center justify-center space-x-3 mt-6">
                 @if($scheduledWash == 2)
-                <input type="datetime-local">
+                <input type="datetime-local" wire:model="scheduledAt">
                 @endif
             </div>
             @endif

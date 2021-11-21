@@ -32,6 +32,9 @@
                     <x-jet-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
                         {{ __('Clients') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('appointments') }}" :active="request()->routeIs('appointments')">
+                        {{ __('Appointments') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -186,6 +189,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
                 {{ __('Clients') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('appointments') }}" :active="request()->routeIs('appointments')">
+                {{ __('Appointments') }}
             </x-jet-responsive-nav-link>
         </div>
 

@@ -41,3 +41,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/clients', funct
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/client/{client}/invoices', function () {
     return view('ClientInvoices.index');
 })->name('viewClientInvoices');
+
+
+// View Client Invoices
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/appointments', function () {
+    return view('appointments.index');
+})->name('appointments');

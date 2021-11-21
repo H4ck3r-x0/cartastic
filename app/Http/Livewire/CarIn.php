@@ -25,6 +25,7 @@ class CarIn extends Component
     public $selectedCarType = '';
     public $selectedServices = [];
     public $scheduledWash = 1;
+    public $scheduledAt = null;
     public $totalPrice = 0;
     public $taxRate;
     public $totalPriceWithTax;
@@ -112,7 +113,8 @@ class CarIn extends Component
             $this->taxRate->tax,
             $this->totalPrice,
             $this->totalPriceWithTax,
-            $this->clientCarType->name
+            $this->clientCarType->name,
+            $this->scheduledAt
         );
     }
 
