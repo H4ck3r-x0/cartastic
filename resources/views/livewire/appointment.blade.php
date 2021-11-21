@@ -1,16 +1,12 @@
 <div x-data="{show: true, viewedRow: null}">
-    <div class="flex items-center">
-      {{-- <div class="p-4">
-          <x-jet-input @keyup="show=true" class="block mt-1" size="30" type="text" wire:model="query"  required autofocus placeholder="Search, eg, id, car type name etc .." />
-      </div> --}}
-      {{-- <div class="p-4">
-        <select wire:model="carType" id="carType">
-          <option value="">All Cars</option>
-          @foreach ($cars as $car)
-          <option value="{{ $car->name }}">{{ $car->name }}</option>  
-          @endforeach
+    <div class="flex  items-center justify-between">
+    
+      <div class="p-4">
+        <select wire:model="appointmentStatus" id="appointmentStatus">
+          <option value="">Appointment Status</option>
+          <option value="1">Confiremd</option>
         </select>
-      </div> --}}
+      </div>
   
       <x-jet-button class="p-4 m-4" @click="show=!show" x-text="show ? 'Hide Table' : 'Show Table'">
       </x-jet-button>
@@ -113,9 +109,6 @@
                     </x-jet-button>
                     @endif
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="#" wire:click="delete({{ $appointment->id }})" class="text-red-600 hover:text-indigo-900">Delete</a>
-                </td>
                 </tr>
                 @endforeach
               </tbody>

@@ -1875,12 +1875,6 @@ select {
 .leading-none {
 	line-height: 1;
 }
-.leading-3 {
-	line-height: .75rem;
-}
-.leading-6 {
-	line-height: 1.5rem;
-}
 .tracking-widest {
 	letter-spacing: 0.1em;
 }
@@ -1969,10 +1963,6 @@ select {
 .text-gray-300 {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
-}
-.text-green-100 {
-	--tw-text-opacity: 1;
-	color: rgba(209, 250, 229, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;

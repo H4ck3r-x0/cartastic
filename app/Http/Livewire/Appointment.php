@@ -10,6 +10,7 @@ class Appointment extends Component
     public $appointments = [];
     public $ScheduledAppointments;
     public $ConfiremdAppointments;
+    public $appointmentStatus;
 
     public function mount()
     {
@@ -32,10 +33,21 @@ class Appointment extends Component
         $this->ConfiremdAppointments = Appointments::where('confirmed', 1)->count();
     }
 
-    // public function getAppointments()
-    // {
-    //     $this->appointments = Appointments::latest()->get();
-    // }
+    public function updatedAppointmentStatus()
+    {
+        $this->filterTableByAppointmentStatus();
+    }
+
+    protected function filterTableByAppointmentStatus()
+    {
+        if (!empty($this->appointmentStatus)) {
+            $this->appointments = Appointments::latest()
+                ->where('confirmed', $this->appointmentStatus)
+                ->get();
+        } else {
+            $this->appointments = Appointments::latest()->get();
+        }
+    }
 
     public function render()
     {
