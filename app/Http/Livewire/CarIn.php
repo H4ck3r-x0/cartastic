@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Tax;
 use App\Models\Client;
 use App\Models\CarType;
 use App\Models\Service;
 use Livewire\Component;
-use App\Models\Tax;
 
 class CarIn extends Component
 {
